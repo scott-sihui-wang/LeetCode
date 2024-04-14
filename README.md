@@ -1,6 +1,6 @@
 # LeetCode Solutions
 
-**Skills:** _Data Structure_, _Algorithm Design_, _C++_
+**Skills:** _Data Structures_, _Algorithm Design_, _C++_
 
 This repository is to store my own solutions to leetcode problems.
 
