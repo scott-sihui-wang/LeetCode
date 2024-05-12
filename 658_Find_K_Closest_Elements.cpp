@@ -27,13 +27,7 @@ public:
         }
         range_L=upper;
         int up=0,down=0;
-        if(range_L==range_H){
-            ans.push_back(arr[range_L]);
-            k--;
-            up++;
-            down++;
-        }
-        else if(range_L>=0 && range_L<arr.size() && range_H>=0 && range_H<arr.size() && arr[range_L]==arr[range_H]){
+        if(range_L>=0 && range_L<arr.size() && range_H>=0 && range_H<arr.size() && arr[range_L]==arr[range_H]){
             int l=min(range_L,range_H);
             int u=max(range_L,range_H);
             if(k<=u-l+1){
