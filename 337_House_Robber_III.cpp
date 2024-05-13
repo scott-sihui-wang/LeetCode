@@ -12,27 +12,25 @@
 class Solution {
 public:
     int traverse(TreeNode* root,unordered_map<TreeNode*,int>& rob_val){
-        if(root==nullptr)return 0;
         if(rob_val.find(root)!=rob_val.end())return rob_val[root];
         if(root->left==nullptr && root->right==nullptr){
-            rob_val[root]=root->val;
-            return rob_val[root];
+            return rob_val[root]=root->val;
         }
         traverse(root->left,rob_val);
         traverse(root->right,rob_val);
-        int val1=traverse(root->left,rob_val)+traverse(root->right,rob_val);
+        int val1=rob_val[root->left]+rob_val[root->right];
         int val2=root->val;
         if(root->left!=nullptr){
-            val2+=traverse(root->left->left,rob_val)+traverse(root->left->right,rob_val);
+            val2+=rob_val[root->left->left]+rob_val[root->left->right];
         }
         if(root->right!=nullptr){
-            val2+=traverse(root->right->left,rob_val)+traverse(root->right->right,rob_val);
+            val2+=rob_val[root->right->left]+rob_val[root->right->right];
         }
-        rob_val[root]=max(val1,val2);
-        return rob_val[root];
+        return rob_val[root]=max(val1,val2);
     }
     int rob(TreeNode* root) {
         unordered_map<TreeNode*,int>rob_val;
+        rob_val[nullptr]=0;
         return traverse(root,rob_val);
     }
 };
