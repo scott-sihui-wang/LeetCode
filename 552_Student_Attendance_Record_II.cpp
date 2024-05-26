@@ -20,11 +20,11 @@ public:
         for(int i=4;i<=n;i++){
             dp_LP[i]=((dp_LP[i-1]%MOD)+(dp_LP[i-2]%MOD)+(dp_LP[i-3]%MOD))%MOD;
         }
-        int ans=0;
-        ans+=(dp_LP[n])%MOD;
+        long long ans=0;
+        ans+=dp_LP[n];
         ans=ans%MOD;
         for(int i=1;i<=n;i++){
-            ans+=((dp_LP[i-1]%MOD)*(dp_LP[n-i]%MOD))%MOD;
+            ans+=(dp_LP[i-1]*dp_LP[n-i])%MOD;
             ans=ans%MOD;
         }
         return ans;
