@@ -1,24 +1,40 @@
 class Solution {
 public:
-    bool validSquare(vector<int>& p1, vector<int>& p2, vector<int>& p3, vector<int>& p4) {
-        int len1=(p1[0]-p2[0])*(p1[0]-p2[0])+(p1[1]-p2[1])*(p1[1]-p2[1]);
-        int len2=(p1[0]-p3[0])*(p1[0]-p3[0])+(p1[1]-p3[1])*(p1[1]-p3[1]);
-        int len3=(p2[0]-p3[0])*(p2[0]-p3[0])+(p2[1]-p3[1])*(p2[1]-p3[1]);
-        if(len1==len2 && len3==len1+len2){
-            if(p4[1]-p2[1]==p3[1]-p1[1] && p4[0]-p2[0]==p3[0]-p1[0]){
-                return true;
+    int findUnsortedSubarray(vector<int>& nums) {
+        int n=nums.size();
+        int pgl[n],nsr[n];
+        for(int i=0;i<n;i++){
+            pgl[i]=-1;
+            for(int j=0;j<i;j++){
+                if(nums[j]>nums[i]){
+                    pgl[i]=j;
+                    break;
+                }
             }
         }
-        else if(len1==len3 && len2==len1+len3){
-            if(p4[1]-p3[1]==p1[1]-p2[1] && p4[0]-p3[0]==p1[0]-p2[0]){
-                return true;
+        for(int i=n-1;i>=0;i--){
+            nsr[i]=-1;
+            for(int j=n-1;j>i;j--){
+                if(nums[j]<nums[i]){
+                    nsr[i]=j;
+                    break;
+                }
             }
         }
-        else if(len2==len3 && len1==len2+len3){
-            if(p4[1]-p2[1]==p1[1]-p3[1] && p4[0]-p2[0]==p1[0]-p3[0]){
-                return true;
+        int pgl_m=n,nsr_M=-1;
+        for(int i=0;i<n;i++){
+            if(pgl[i]!=-1){
+                pgl_m=min(pgl_m,pgl[i]);
+            }
+            if(nsr[i]!=-1){
+                nsr_M=max(nsr_M,nsr[i]);
             }
         }
-        return false;
+        if(pgl_m!=n && nsr_M!=-1){
+            return nsr_M-pgl_m+1;
+        }
+        else{
+            return 0;
+        }
     }
 };
